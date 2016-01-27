@@ -13,7 +13,7 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="= 一.GitLab背景介绍
 GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能">
-<meta property="og:updated_time" content="2016-01-27T07:56:04.785Z">
+<meta property="og:updated_time" content="2016-01-27T08:00:06.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="= 一.GitLab背景介绍
@@ -66,7 +66,7 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
         <section id="main"><article id="post-gitlab安装" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/01/27/gitlab安装/" class="article-date">
-  <time datetime="2016-01-27T07:56:04.791Z" itemprop="datePublished">2016-01-27</time>
+  <time datetime="2016-01-27T08:00:06.767Z" itemprop="datePublished">2016-01-27</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
       
         <p>= 一.GitLab背景介绍</p>
 <p>GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
-<p>= 二.安装软件的版本<br>== 1.系统版本<br>|系统信息|具体值|<br>|—|—|<br>|centos6.6 |64位|<br>|MEM|1G|<br>|CPU|i5-4210U CPU @ 1.70GHz(单核)|<br>|ip地址|10.0.1.217|</p>
+<p>= 二.安装软件的版本<br>== 1.系统版本<br>|系统信息|具体值|<br>|centos6.6 |64位|<br>|MEM|1G|<br>|CPU|i5-4210U CPU @ 1.70GHz(单核)|<br>|ip地址|10.0.1.217|</p>
 <p>== 2.软件版本号</p>
 <table>
 <thead>
@@ -127,14 +127,17 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
 </table>
 <p>= 三.安装过程<br>gitlab官方的一键安装包地址为 <a href="https://about.gitlab.com/downloads/" target="_blank" rel="external">https://about.gitlab.com/downloads/</a></p>
 <p>==1.安装必要的支持软件<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> curl openssh-<span class="keyword">server</span> postfix cronie  -y</span></span><br></pre></td></tr></table></figure></p>
-<p>==2.开启邮件服务（postfix发送邮件）<br>   service postfix start<br>==3.增加gitlab软件包和安装软件，并且启动各个服务<br>   curl <a href="https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh" target="_blank" rel="external">https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh</a> | sudo bash<br>   yum install gitlab-ce -y    （安装时间较长，需要下载大概300M的文件）<br>==4. gitlab生成用户名和reconfigure<br>   sudo gitlab-ctl reconfigure<br>   sudo gitlab-ctl  restart<br>   Username: root<br>   Password: 5iveL!fe</p>
-<p>=四.gitlab命令使用<br>  gitlab一键yum安装之后，生成的文件在  /opt/gitlab/ 和  /var/opt/gitlab/<br>  gitlab-ctl stop  停止gitlab有关的服务（nginx，ruby，postgres，gitlab，redis等）<br>  gitlab-ctl start<br>  gitlab-ctl  restart<br>  gitlab-ctl reconfigure   修改gitlab配置之后，配置生效<br>  gitlab-ctl  help     查看具体每个命令的用法<br>=五.使用说明<br>   安装目录为：/opt/gitlab<br>   gitlab 备份： gitlab-rake gitlab:backup:create<br>   会在/var/opt/gitlab/backups目录下创建一个名称类似为1393513186_gitlab_backup.tar的压缩包, 这个压缩包就是Gitlab整个的完整部分<br>   gitlab配置文件：/etc/gitlab/gitlab.rb ,配置完成后可使用gitlab-ctl reconfigure 使配置生效</p>
+<p>==2.开启邮件服务（postfix发送邮件）<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postfix <span class="literal">start</span></span><br></pre></td></tr></table></figure></p>
+<p>==3.增加gitlab软件包和安装软件，并且启动各个服务<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http<span class="variable">s:</span>//packages.gitlab.<span class="keyword">com</span>/install/repositories/gitlab/gitlab-<span class="keyword">ce</span>/script.rpm.<span class="keyword">sh</span> | sudo bash </span><br><span class="line">yum install gitlab-<span class="keyword">ce</span> -<span class="keyword">y</span>    （安装时间较长，需要下载大概<span class="number">300</span>M的文件）</span><br></pre></td></tr></table></figure></p>
+<p>==4. gitlab生成用户名和reconfigure<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure    </span><br><span class="line">sudo gitlab-ctl  restart</span><br><span class="line"><span class="label">Username:</span> root </span><br><span class="line"><span class="label">Password:</span> <span class="number">5</span>iveL!fe</span><br></pre></td></tr></table></figure></p>
+<p>=四.gitlab命令使用<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gitlab一键yum安装之后，生成的文件在  /<span class="keyword">opt</span>/gitlab/ 和  /var/<span class="keyword">opt</span>/gitlab/</span><br><span class="line">gitlab-ctl <span class="keyword">stop</span>  停止gitlab有关的服务（nginx，<span class="keyword">ruby</span>，postgres，gitlab，redis等）</span><br><span class="line">gitlab-ctl start </span><br><span class="line">gitlab-ctl  restart</span><br><span class="line">gitlab-ctl reconfigure   修改gitlab配置之后，配置生效</span><br><span class="line">gitlab-ctl  <span class="keyword">help</span>     查看具体每个命令的用法</span><br></pre></td></tr></table></figure></p>
+<p>=五.使用说明<br>   安装目录为：/opt/gitlab<br>   gitlab 备份： gitlab-rake gitlab:backup:create<br>   会在/var/opt/gitlab/backups目录下创建一个名称类似为1393513186_gitlab_backup.tar的压缩包, 这个压缩包就是Gitlab整个的完整部分<br>   gitlab配置文件：/etc/gitlab/gitlab.rb ,配置完成后可使用gitlab-ctl reconfigure 使配置生效</p>
 <p>   具体配置参考：<a href="http://doc.gitlab.com/omnibus/" target="_blank" rel="external">http://doc.gitlab.com/omnibus/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/27/gitlab安装/" data-id="cijwjgu580000okjecrxqwtqz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/27/gitlab安装/" data-id="cijwjkspc0000gsjemjc86wae" class="article-share-link">Share</a>
       
       
     </footer>
