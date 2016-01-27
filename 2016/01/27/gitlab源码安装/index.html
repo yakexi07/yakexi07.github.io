@@ -6,15 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="一.GitLab背景介绍
+GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/01/27/gitlab源码安装/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description">
+<meta property="og:description" content="一.GitLab背景介绍
+GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以">
+<meta property="og:updated_time" content="2016-01-27T08:15:38.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
-<meta name="twitter:description">
+<meta name="twitter:description" content="一.GitLab背景介绍
+GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -196,108 +200,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-gitlab一键安装" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/01/27/gitlab一键安装/" class="article-date">
-  	<time datetime="2016-01-27T08:16:01.840Z" itemprop="datePublished">2016-01-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>= 一.GitLab背景介绍</p>
-<p>GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
-<p>= 二.安装软件的版本<br>== 1.系统版本<br>|系统信息|具体值|<br>|centos6.6 |64位|<br>|MEM|1G|<br>|CPU|i5-4210U CPU @ 1.70GHz(单核)|<br>|ip地址|10.0.1.217|</p>
-<p>== 2.软件版本号</p>
-<table>
-<thead>
-<tr>
-<th>软件名称</th>
-<th>版本号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>gitlab</td>
-<td>v7.13.1</td>
-</tr>
-<tr>
-<td>gitlab-shell</td>
-<td>2.6.3</td>
-</tr>
-<tr>
-<td>gitlab API</td>
-<td>v3</td>
-</tr>
-<tr>
-<td>Ruby</td>
-<td>2.1.6p336</td>
-</tr>
-<tr>
-<td>Rails</td>
-<td>4.1.11</td>
-</tr>
-<tr>
-<td>nginx</td>
-<td>1.7.12</td>
-</tr>
-<tr>
-<td>redis</td>
-<td>2.8.20</td>
-</tr>
-<tr>
-<td>python</td>
-<td>2.7</td>
-</tr>
-<tr>
-<td>PostgreSQL</td>
-<td>9.2.10</td>
-</tr>
-</tbody>
-</table>
-<p>= 三.安装过程<br>gitlab官方的一键安装包地址为 <a href="https://about.gitlab.com/downloads/" target="_blank" rel="external">https://about.gitlab.com/downloads/</a></p>
-<p>==1.安装必要的支持软件<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="operator"><span class="keyword">install</span> curl openssh-<span class="keyword">server</span> postfix cronie  -y</span></span><br></pre></td></tr></table></figure></p>
-<p>==2.开启邮件服务（postfix发送邮件）<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postfix <span class="literal">start</span></span><br></pre></td></tr></table></figure></p>
-<p>==3.增加gitlab软件包和安装软件，并且启动各个服务<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http<span class="variable">s:</span>//packages.gitlab.<span class="keyword">com</span>/install/repositories/gitlab/gitlab-<span class="keyword">ce</span>/script.rpm.<span class="keyword">sh</span> | sudo bash </span><br><span class="line">yum install gitlab-<span class="keyword">ce</span> -<span class="keyword">y</span>    （安装时间较长，需要下载大概<span class="number">300</span>M的文件）</span><br></pre></td></tr></table></figure></p>
-<p>==4. gitlab生成用户名和reconfigure<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure    </span><br><span class="line">sudo gitlab-ctl  restart</span><br><span class="line"><span class="label">Username:</span> root </span><br><span class="line"><span class="label">Password:</span> <span class="number">5</span>iveL!fe</span><br></pre></td></tr></table></figure></p>
-<p>=四.gitlab命令使用<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gitlab一键yum安装之后，生成的文件在  /<span class="keyword">opt</span>/gitlab/ 和  /var/<span class="keyword">opt</span>/gitlab/</span><br><span class="line">gitlab-ctl <span class="keyword">stop</span>  停止gitlab有关的服务（nginx，<span class="keyword">ruby</span>，postgres，gitlab，redis等）</span><br><span class="line">gitlab-ctl start </span><br><span class="line">gitlab-ctl  restart</span><br><span class="line">gitlab-ctl reconfigure   修改gitlab配置之后，配置生效</span><br><span class="line">gitlab-ctl  <span class="keyword">help</span>     查看具体每个命令的用法</span><br></pre></td></tr></table></figure></p>
-<p>=五.使用说明<br>   安装目录为：/opt/gitlab<br>   gitlab 备份： gitlab-rake gitlab:backup:create<br>   会在/var/opt/gitlab/backups目录下创建一个名称类似为1393513186_gitlab_backup.tar的压缩包, 这个压缩包就是Gitlab整个的完整部分<br>   gitlab配置文件：/etc/gitlab/gitlab.rb ,配置完成后可使用gitlab-ctl reconfigure 使配置生效</p>
-<p>   具体配置参考：<a href="http://doc.gitlab.com/omnibus/" target="_blank" rel="external">http://doc.gitlab.com/omnibus/</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-gitlab源码安装" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-gitlab源码安装" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/01/27/gitlab源码安装/" class="article-date">
@@ -341,29 +244,72 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/27/gitlab一键安装/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="gitlab源码安装" data-title="" data-url="http://yoursite.com/2016/01/27/gitlab源码安装/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-  
-  
+
+
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -387,8 +333,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
