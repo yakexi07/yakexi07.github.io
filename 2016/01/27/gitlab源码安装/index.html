@@ -14,7 +14,7 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一.GitLab背景介绍
 GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以">
-<meta property="og:updated_time" content="2016-01-27T08:32:08.365Z">
+<meta property="og:updated_time" content="2016-01-27T08:52:25.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab源码安装">
 <meta name="twitter:description" content="一.GitLab背景介绍
@@ -241,8 +241,80 @@ GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个�
 <p>GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
 <p>= 一.GitLab背景介绍</p>
 <p>GitLab是利用 Ruby on Rails 一个开源的版本管理系统，实现一个自托管的Git项目仓库，可通过Web界面进行访问公开的或者私人项目。它拥有与Github类似的功能，能够浏览源代码，管理缺陷和注释。可以管理团队对仓库的访问，它非常易于浏览提交过的版本并提供一个文件历史库。团队成员可以利用内置的简单聊天程序(Wall)进行交流。它还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。</p>
-<p>= 二.安装软件的版本<br>== 1.系统版本<br>|系统信息|具体值|<br>|—|—|<br>|centos6.6 |64位|<br>|MEM|1G|<br>|CPU|i5-4210U CPU @ 1.70GHz(单核)|<br>|ip地址|10.0.1.217|</p>
-<p>== 2.软件版本号<br>|软件名称|版本号|<br>|—|—|<br>|GitlLab|v6.3.1L|<br>|GitLab-shell|1.8.0|<br>|GitLab API|v3|<br>|Gem|2.0.14|<br>|Bundler |1.10.6|<br>|Rake |10.1.0|<br>|Ruby|2.0.0p353|<br>|Redis|2.8.19|<br>|nginx|1.8.0|<br>|python|2.7|<br>|mysql|5.1.73|</p>
+<p>= 二.安装软件的版本<br>== 1.系统版本</p>
+<table>
+<thead>
+<tr>
+<th>系统信息</th>
+<th>具体值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>centos6.6</td>
+<td>64位</td>
+</tr>
+<tr>
+<td>MEM</td>
+<td>1G</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>i5-4210U CPU @ 1.70GHz(单核)</td>
+</tr>
+<tr>
+<td>ip地址</td>
+<td>10.0.1.217</td>
+</tr>
+</tbody>
+</table>
+<p>== 2.软件版本号</p>
+<table>
+<thead>
+<tr>
+<th>软件名称</th>
+<th>版本号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gitlab</td>
+<td>v7.13.1</td>
+</tr>
+<tr>
+<td>gitlab-shell</td>
+<td>2.6.3</td>
+</tr>
+<tr>
+<td>gitlab API</td>
+<td>v3</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>2.1.6p336</td>
+</tr>
+<tr>
+<td>Rails</td>
+<td>4.1.11</td>
+</tr>
+<tr>
+<td>nginx</td>
+<td>1.7.12</td>
+</tr>
+<tr>
+<td>redis</td>
+<td>2.8.20</td>
+</tr>
+<tr>
+<td>python</td>
+<td>2.7</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>9.2.10</td>
+</tr>
+</tbody>
+</table>
 <p>三.安装过程<br>1.安装gitlab所需要的依赖包和软件<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -<span class="keyword">y</span> install <span class="keyword">vim</span>-enhanced readline readline-devel ncurses-devel gdbm-devel glibc-devel <span class="keyword">tcl</span>-devel openssl-devel curl-devel      </span><br><span class="line">expat-devel db4-devel byacc sqlite-devel gcc-<span class="keyword">c</span>++ libyaml libyaml-devel libffi libffi-devel libxml2 libxml2-devel libxslt     </span><br><span class="line">libxslt-devel libicu libicu-devel <span class="built_in">system</span>-config-firewall-tui <span class="keyword">python</span>-devel  sudo wget crontabs logwatch logrotate <span class="keyword">perl</span>-Time-HiRes</span><br></pre></td></tr></table></figure></p>
 <p>2.安装redis，配置并且启动redis<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="comment">//redis.googlecode.com/files/redis-2.6.13.tar.gz</span></span><br><span class="line">tar xzf redis-<span class="number">2.6</span>.<span class="number">13</span><span class="class">.tar</span><span class="class">.gz</span></span><br><span class="line">cd redis-<span class="number">2.6</span>.<span class="number">13</span></span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line">cp redis<span class="class">.conf</span> /etc/</span><br><span class="line">vim /etc/redis<span class="class">.conf</span>     #修改daemonize yes---目的使进程在后台运行</span><br><span class="line">cd /usr/local/bin</span><br><span class="line">./redis-server /etc/redis<span class="class">.conf</span>  #启动redis</span><br></pre></td></tr></table></figure></p>
 <p>3.安装git<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel -y</span><br><span class="line">yum install openssl-devel zlib-devel perl-devel  -y</span><br><span class="line">yum install perl-ExtUtils-CBuilder -y</span><br><span class="line">yum install perl-ExtUtils-MakeMaker -y</span><br><span class="line">cd /mnt/</span><br><span class="line"><span class="preprocessor">#安装libiconv</span></span><br><span class="line">wget http:<span class="comment">//ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</span></span><br><span class="line">tar -zxvf libiconv-<span class="number">1.14</span>.tar.gz</span><br><span class="line">cd libiconv-<span class="number">1.14</span></span><br><span class="line">./configure  </span><br><span class="line">&amp;&amp;  make  &amp;&amp; make install</span><br><span class="line">安装git2<span class="number">.2</span><span class="number">.0</span></span><br><span class="line">wget https:<span class="comment">//github.com/git/git/archive/v2.2.0.tar.gz</span></span><br><span class="line">tar xf v2<span class="number">.2</span><span class="number">.0</span></span><br><span class="line">cd git-<span class="number">2.2</span><span class="number">.0</span></span><br><span class="line">make prefix=/Data/apps/git all</span><br><span class="line">make configure</span><br><span class="line">./configure  </span><br><span class="line"> make</span><br><span class="line"> make install</span><br></pre></td></tr></table></figure></p>
